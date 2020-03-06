@@ -12,11 +12,11 @@ export class TimerComponent implements OnInit {
 
 	@ViewChild('cd') countdown: CountdownComponent;
 	isBrewComplete;
-	@Input() timer: Timer;
-
 	time;
 	config: any;
 	isTimerPaused;
+	
+	@Input() timer: Timer;
 
   ngOnInit(): void {
   	this.isBrewComplete = false;
@@ -43,17 +43,6 @@ export class TimerComponent implements OnInit {
 		this.updateTimer();
 	}
 
-  handleTimerEvent($event) {
-  	console.log($event);
-  	switch ($event.action) {
-  		case "done":
-  			this.isBrewComplete = true;
-  			break;
-  		default:
-  			break;
-  	}
-  }
-
   updateTimer() {
 	this.time = this.calculateBrewTime();
 	this.config = {leftTime: this.time, demand: this.isTimerPaused};
@@ -69,6 +58,17 @@ export class TimerComponent implements OnInit {
 		this.isTimerPaused = !this.isTimerPaused;
 	}
   }
+
+  restartTimer() {
+	  this.countdown.restart();
+	  this.config = {leftTime: this.time, demand: this.isTimerPaused};
+  }
+
+  clearTimer() {
+	this.timer = { hours: 0, minutes: 0, seconds: 0};
+	this.isTimerPaused = true;
+	this.config = {leftTime: 0, demand: true};
+}
 
   calculateBrewTime (): number {
   	return this.timer.hours * 3600 + this.timer.minutes * 60 + this.timer.seconds;  
