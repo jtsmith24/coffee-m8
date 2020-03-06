@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { CountdownComponent } from 'ngx-countdown';
 import { Timer } from '../../timer'
 
@@ -13,17 +13,35 @@ export class TimerComponent implements OnInit {
 	@ViewChild('cd') countdown: CountdownComponent;
 	isBrewComplete;
 	@Input() timer: Timer;
+
 	time;
 	config: any;
 	isTimerPaused;
 
-  constructor() { }
-
   ngOnInit(): void {
   	this.isBrewComplete = false;
-  	this.timer = { hours: 5, minutes: 8, seconds: 9};
-  	this.initializeTimer();
+	this.timer = { hours: 0, minutes: 0, seconds: 0};
+	this.isTimerPaused = true;
+  	this.updateTimer();
   }
+
+  hoursChanged($event) : void {
+	  console.log("hours: " + $event);
+	  this.timer.hours = $event;
+	  this.updateTimer();
+  }
+
+  minutesChanged($event) : void {
+		console.log("minutes: " + $event);
+		this.timer.minutes = $event;
+		this.updateTimer();
+	}
+
+	secondsChanged($event) : void {
+		console.log("seconds: " + $event);
+		this.timer.seconds = $event;
+		this.updateTimer();
+	}
 
   handleTimerEvent($event) {
   	console.log($event);
@@ -36,10 +54,9 @@ export class TimerComponent implements OnInit {
   	}
   }
 
-  initializeTimer() {
+  updateTimer() {
 	this.time = this.calculateBrewTime();
-	this.config = {leftTime: this.time, demand: true};
-	this.isTimerPaused = true;  
+	this.config = {leftTime: this.time, demand: this.isTimerPaused};
   }
 
   startTimer() {
@@ -51,14 +68,6 @@ export class TimerComponent implements OnInit {
 		this.countdown.pause();
 		this.isTimerPaused = !this.isTimerPaused;
 	}
-  }
-
-  pauseTimer() {
-
-  }
-
-  resetTimer() {
-
   }
 
   calculateBrewTime (): number {

@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "coffee-m8": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "coffee-m8"
+    }
+  },
+  "defaultProject": "coffee-m8",
+  "cli": {
+    "analytics": "b8e3509a-c8de-4444-b044-8ca2fae3e316"
+  }
 }

@@ -1,6 +1,6 @@
-<input type="number" name="brewHours" [(ngModel)]="timer.hours" placeholder="Hours"> Hours<br>
-<input type="number" name="brewMinutes" [(ngModel)]="timer.minutes"> Minutes<br>
-<input type="number" name="brewSeconds" [(ngModel)]="timer.seconds"> Seconds<br>
+<input type="number" name="brewHours" (ngModelChange)="hoursChanged($event)" [(ngModel)]="timer.hours" placeholder="Hours"> Hours<br>
+<input type="number" name="brewMinutes" (ngModelChange)="minutesChanged($event)" [(ngModel)]="timer.minutes"> Minutes<br>
+<input type="number" name="brewSeconds" (ngModelChange)="secondsChanged($event)" [(ngModel)]="timer.seconds"> Seconds<br>
 <countdown #cd [config]="config" (event)="handleTimerEvent($event)"></countdown><br>
 <button (click)="startTimer()"><span *ngIf="isTimerPaused">Start</span> <span *ngIf="!isTimerPaused">Pause</span></button>
 <button (click)="cd.restart()">Restart</button><br>
