@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimerComponent } from './brew/timer/timer.component';
 import { BrewComponent } from './brew/brew.component';
+import { BrewCalculatorComponent } from './brew/brew-calculator/brew-calculator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimerComponent,
-    BrewComponent
+    BrewComponent,
+    BrewCalculatorComponent
   ],
   imports: [
     BrowserModule,
